@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
 
 import Aux from '../../hoc/Aux/Aux';
@@ -104,7 +105,7 @@ class BurgerBuilder extends Component{
       },
       deliveryMethod: 'fastest'
     }
-    axios.post('/orders.json', order)
+    axios.post('/orders', order)
       .then(response => {
         this.setState({loading: false, purchasing: false});
       })
@@ -148,4 +149,4 @@ class BurgerBuilder extends Component{
   };
 };
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder, axios);
